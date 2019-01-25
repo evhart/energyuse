@@ -1,0 +1,71 @@
+{% load i18n %}
+{% load humanize %}
+
+
+{% if not user.is_authenticated %}
+    <section class="container-fluid" xmlns="http://www.w3.org/1999/html">
+        {# Header for the landing ------------------------------------- #}
+        <div id="header" class="row">
+
+            <div class="container-fluid col-md-12">
+                <div class="jumbotron">
+                    <div class="row">
+                        {# Text #}
+                        <div class="container col-md-4">
+                            <h1>GET PLUGGED INTO YOUR ENERGY CONSUMPTION</h1>
+
+                            <p class="text-faded">EnergyUse is a space for sharing real-life experiences on the energy
+                                consumption of typical
+                                appliances, be you an energy expert or not!</p>
+
+                             <p class="text-faded">
+                                 <a href="{% url "signup" %}"><button class="btn btn-default">Register</button></a> or <a href="{% url "account_login" %}"><button class="btn btn-default">Login</button></a>
+                             </p>
+
+                        </div>
+
+                        {# Icons #}
+                        <div class="service-box-container col-md-8">
+{#                            <div class="button close"><i class="fa fa-close"></i></div>#}
+                            <div class="col-lg-4 col-md-4 text-center">
+                                <div class="service-box">
+                                    <i class="fa fa-4x fa-plug wow bounceIn text-primary"
+                                       style="visibility: visible; animation-name: bounceIn;"></i>
+
+                                    <h3>Get Plugged</h3>
+
+                                    <p class="text-muted">Smart plugs monitor the consumption of individual appliances.
+                                        If you have one, use it!</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 text-center">
+                                <div class="service-box">
+                                    <i class="fa fa-4x fa-dashboard wow bounceIn text-primary" data-wow-delay=".1s"
+                                       style="visibility: visible; animation-delay: 0.1s; animation-name: bounceIn;"></i>
+
+                                    <h3>Measure and Save</h3>
+
+                                    <p class="text-muted">Measure your own consumption or follow what other people are
+                                        talking about.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 text-center">
+                                <div class="service-box">
+                                    <i class="fa fa-4x fa-leaf wow bounceIn text-primary" data-wow-delay=".2s"
+                                       style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
+
+                                    <h3>Let's Save Together!</h3>
+
+                                    <p class="text-muted">Share your experiences by joining discussions. Your hints can
+                                        help other people.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# End Header for the landing ------------------------------------- #}
+
+    </section>
+{% endif %}

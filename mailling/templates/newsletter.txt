@@ -1,0 +1,23 @@
+Dear {{username}},
+
+We wish you a very happy 2016!
+
+Have you visited EnergyUse recently?
+
+Come to energyuse.eu and see what people are discussing now.
+
+The most recent discussions are on {% for concept in lastTags %}{% if not forloop.first %}, {% endif %}#{{concept.name}}{%endfor%}.
+
+And the most popular discussion is about #{{topTag}}
+
+Top three contributors are {% for user in topContributors %}{% if not forloop.first %}, {% endif %}{{user}}{%endfor%}.
+
+You are one of our 140 VIP users invited to use energyuse.eu. We are counting on you to energise the discussions!
+
+If you haven't registerd yet, you can register now by following this link: https://energyuse.eu/accounts/signup/
+
+Do no hesitate to contact us to give your feedback.
+
+Best regards,
+
+EnergyUse team

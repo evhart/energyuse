@@ -1,0 +1,99 @@
+{% load humanize %}
+{% load server_tags %}
+{% load cache %}
+
+{#{% for user in top_users %}#}
+
+<div class="featured service-box">
+
+    {% if not top_topics %}
+    <div class="row">
+    <div class="text-center">
+        <p>No topics.</p>     
+    </div>
+    </div>
+
+    {% else %}
+    <div class="row">
+
+        {% if top_topics.0 %}
+        <div class="col-lg-6 col-md-6 col-xs-6 text-center">
+            <a href="{% url 'topic-list' top_topics.0.tag %}" class="unlink">
+                <div class="service-box">
+                    {% if top_topics.0.icon.url %}
+                        <img src="{{ top_topics.0.icon.url }}" style="width: 50%;">
+                    {% endif %}
+
+                    <h3>{{ top_topics.0.fullname }}</h3>
+
+                    {% if top_topics.0.description %}
+                    <p class="text-faded">{{ top_topics.0.description|striptags|truncatechars:50}}</p>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+
+        {% if top_topics.1 %}
+        <div class="col-lg-6 col-md-6  col-xs-6 text-center">
+            <a href="{% url 'topic-list' top_topics.1.tag %}" class="unlink">
+                <div class="service-box">
+                    {% if top_topics.1.icon.url %}
+                        <img src="{{ top_topics.1.icon.url }}" style="width: 50%;">
+                    {% endif %}
+
+                    <h3>{{ top_topics.1.fullname }}</h3>
+
+                    {% if top_topics.1.description %}
+                    <p class="text-faded">{{ top_topics.1.description|striptags|truncatechars:50}}</p>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+    <div class="row">
+
+        {% if top_topics.2 %}
+        <div class="col-lg-6 col-md-6  col-xs-6 text-center">
+            <a href="{% url 'topic-list' top_topics.2.tag %}" class="unlink">
+                <div class="service-box">
+                    {% if top_topics.2.icon.url %}
+                        <img src="{{ top_topics.2.icon.url }}" style="width: 50%;">
+                    {% endif %}
+
+                    <h3>{{ top_topics.2.fullname }}</h3>
+
+                    {% if top_topics.2.description %}
+                    <p class="text-faded">{{ top_topics.2.description|striptags|truncatechars:50}}</p>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+        {% if top_topics.3 %}
+        <div class="col-lg-6 col-md-6  col-xs-6 text-center">
+            <a href="{% url 'topic-list' top_topics.3.tag %}" class="unlink">
+                <div class="service-box">
+                    {% if top_topics.3.icon.url %}
+                        <img src="{{ top_topics.3.icon.url }}" style="width: 50%;">
+                    {% endif %}
+                    <h3>{{ top_topics.3.fullname }}</h3>
+
+                    {% if top_topics.3.description %}
+                    <p class="text-faded">{{ top_topics.3.description|striptags|truncatechars:50}}</p>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+        {% endif %}
+
+
+    </div>
+    {% endif %}
+
+
+</div>

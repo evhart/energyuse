@@ -1,0 +1,22 @@
+Dear {{username}},
+
+We wish you a very happy 2016.
+
+You are one of our X VIP users invited to use energyuse.eu with the electricity meters we provided.
+
+Since the launch of EnergyUse last month, it has received:
+- {{nbusers}} registrations
+- {{nbposts}} discussion posts and comments
+- {{nbvotes}} votes
+
+Most recent discussions are on: {% for concept in lastTags %}{% if not forloop.first %}, {% endif %}#{{concept.name}}{%endfor%}.
+
+Top three contributors are: {% for user in topContributors %}{% if not forloop.first %}, {% endif %}{{user}}{%endfor%}.
+
+*Please come along and energise EnergyUse. *
+
+Do no hesitate to contact us for any problems with the electricity monitoring devices or with EnergyUse.
+
+Best regards,
+
+The EnergyUse team

@@ -1,0 +1,239 @@
+{% load i18n %}
+{% load humanize %}
+{% load server_tags %}
+{% load compress %}
+
+
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Energyuse {% if page_title %}- {{ page_title }}{% endif %}</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/animate.min.css" type="text/css">
+    {% if debug %}
+        <link href="{{ STATIC_URL }}less/energyuse.less" media="all" rel="stylesheet/less" type="text/css"/>
+        <script src="{{ STATIC_URL }}js/less.min.js"></script>
+
+        <script src="{{ STATIC_URL }}lib/select2-3.4.5/select2.min.js" type="text/javascript"></script>
+        <script src="{{ STATIC_URL }}biostar.js?x={% rand_num %}" type="text/javascript"></script>
+    {% else %}
+        {% compress css %}
+            <link href="{{ STATIC_URL }}less/energyuse.less" media="all" rel="stylesheet" type="text/less"/>
+        {% endcompress %}
+        {% compress js %}
+            <script src="{{ STATIC_URL }}lib/select2-3.4.5/select2.min.js" type="text/javascript"></script>
+            <script src="{{ STATIC_URL }}biostar.js" type="text/javascript"></script>
+        {% endcompress %}
+    {% endif %}
+
+
+
+    {% block extras %}
+        {# Extra header may be injected here #}
+    {% endblock %}
+
+    {% include "banners/banner-scripts.html" %}
+
+    <script type="application/javascript">
+        {% if user.is_authenticated %}
+            USER_ID = {{ user.id }};
+        {%  else %}
+            USER_ID = null;
+        {% endif %}
+        TITLE_SEARCH_URL = "{% url 'search-title' %}"
+        POST_DISPLAY_URL = "/p/"
+    </script>
+
+</head>
+
+<body>
+<section class="container-fluid">
+    <nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <i class="glyphicon glyphicon-flash"></i> ENERGYUSE <span class="beta text-muted text-lowercase">beta</span>
+                </a>
+            </div>
+            <div class="navbar-left">
+                <a href="{% url 'home' %}" type="button" class="btn btn-default navbar-btn">Discussions</a>
+{#                <a type="button" class="btn btn-default navbar-btn">News</a>#}
+                <a href="{% url 'tag-list' %}" type="button" class="btn btn-default navbar-btn">Tags</a>
+                <a href="{% url 'user-list' %}" type="button" class="btn btn-default navbar-btn">Users</a>
+            </div>
+            <div class="navbar-right">
+                <p class="navbar-text"><a href="{% url 'new-post' %}" class="navbar-link">+ New Conversation</a></p>
+
+                {#                <p class="navbar-text"><a href="#" class="navbar-link">GREG</a> <span class="circle-image small"></span>#}
+                {#                </p>#}
+
+                {#   Code for login form -----------------  #}
+                {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav ">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false"><span class="circle-image small" style="background-image: url('{% gravatar_img user 22 %}')"></span> {{ user.name }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'user-details' user.id %}">My Profile</a></li>
+                                <li><a href="#">My Consumption</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                {% else %}
+                <ul class="nav navbar-nav ">
+                    {#                    <li><p class="navbar-text text-muted">Already have an account?</p></li>#}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Register / Login<span
+                                class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form" role="form" method="post" action="{% url "account_login" %}"
+                                              accept-charset="UTF-8" id="login-nav">
+
+                                            {% csrf_token %}
+                                            <div id="div_id_login" class="form-group">
+                                                <div class="controls "><input autofocus="autofocus"
+                                                                              class="textinput textInput form-control"
+                                                                              id="id_login" name="login"
+                                                                              placeholder="Username or e-mail"
+                                                                              type="text"></div>
+                                            </div>
+
+
+                                            <div id="div_id_password" class="form-group">
+                                                <div class="controls "><input class="textinput textInput form-control"
+                                                                              id="id_password" name="password"
+                                                                              placeholder="Password" type="password">
+                                                </div>
+                                                <div class="help-block text-right"><a
+                                                        href="{% url 'account_reset_password' %}">Forgot the password
+                                                    ?</a>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-success btn-block">Sign in</button>
+                                            </div>
+                                            <div id="div_id_remember" class="checkbox"><label for="id_remember"
+                                                                                              class=""><input
+                                                    class="checkboxinput checkbox" id="id_remember" name="remember"
+                                                    type="checkbox">
+                                                Remember Me</label></div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        New here ? <a href="{% url 'signup' %}"><b>Join Us</b></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {%  endif %}
+                {#   End Code for login form -----------------  #}
+
+            </div>
+        </div>
+    </nav>
+</section>
+
+{#<div style="max-width: 1280px; margin: auto">#}
+<div>
+    {%  include "banner.html" %}
+
+
+    <section id="main" class="container-fluid">
+        {% if messages %}
+           <div class="row ">{# wow fadeOut" data-wow-delay="5s">#}
+                <div class="col-md-12 col-sm-offset-0 text-center">
+                    {% for message in messages %}
+                        <div class="alert  {{ message.tags }}">{{ message|safe }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% block content %}
+            <div class="row">
+                <div class="col-lg-6"></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+            </div>
+        {% endblock %}
+
+    </section>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <div class="navbar-header">
+                    <a class="footer-link navbar-brand text-faded" href="http://decarbonet.eu"><span
+                            class="circle-image small"
+                            style="background-image: url({{ STATIC_URL }}img/logo.png)"></span> Decarbonet.eu</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li>
+                            <a class="footer-link text-faded" href="/faq">FAQ</a>
+                        </li>
+                        <li>
+                            <a class="footer-link text-faded" href="/privacy">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a class="footer-link text-faded" href="/terms">Terms and Conditions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+<script src="{{ STATIC_URL }}js/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
+
+{# Google tracker injected if it exists in the context. Set in the django settings. #}
+{% if GOOGLE_TRACKER %}
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '{{ GOOGLE_TRACKER }}']);
+        _gaq.push(['_setDomainName', '{{ GOOGLE_DOMAIN }}']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+{% endif %}
+</html>
+

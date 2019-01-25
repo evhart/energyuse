@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load server_tags %}
+{% load humanize %}
+{% load eserver_tags %}
+
+{% block page_title %}
+    {{ flatpage.title }} {{ SITE_NAME }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-9">
+            {{ flatpage.content|safe }}
+        </div>
+
+    <div class="col-lg-3">
+            <div>
+                <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                    Featured Topics
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+                </ul>
+            </div>
+            {% featured_tags %}
+
+
+            <div>
+                <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                    Activity
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+                </ul>
+            </div>
+
+            <div style="padding-top: 1em">
+                {% sidebar_votes RECENT_VOTES %}
+
+                {% sidebar_locations RECENT_USERS %}
+
+                {% sidebar_awards RECENT_AWARDS %}
+
+                {% sidebar_posts RECENT_REPLIES %}
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

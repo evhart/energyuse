@@ -1,0 +1,47 @@
+{#<div class="col-lg-12 container" style="margin-bottom: 20px; padding: 25px">#}
+{#    <div>#}
+{#        <h2 class="section-heading">Average Energy Consumption</h2>#}
+{#        <hr class="light"/>#}
+{#        {% if community_avgenergy > 0 %}#}
+{#            <p style="font-size: 30px">#}
+{#                <i class="fa fa-users"></i> {{ community_avgenergy }} kWh / day#}
+{#            </p>#}
+{#        {% endif %}#}
+{#        {% if user_avgenergy == -1 %}#}
+{#            <p>Are you part of DecarboNet Energy Trial? Log in and visit your profile to learn more about your own#}
+{#                consumption.</p>#}
+{#        {% elif user_avgenergy == -2 %}#}
+{#            <p>We couldn't find any data.</p>#}
+{#        {% else %}#}
+{#            <p style="font-size: 30px">#}
+{#                <i class="fa fa-user"></i> {{ user_avgenergy }} kWh / day#}
+{#            </p>#}
+{##}
+{#            <p class="text-faded">Your daily average consumption compared to the community.</p>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#</div>#}
+
+<div class="col-lg-12 container featured service-box" style="margin-bottom: 20px; padding: 25px;">
+    <div class="text-center">
+        <p class="section-heading" style="font-size: 1.5em">Average Energy Consumption</p>
+    		<hr class="light"/>
+        {% if community_avgenergy > 0 %}
+            <p style="font-size: 1.5em">
+                <i class="fa fa-users"></i> {{ community_avgenergy }} kWh / day
+            </p>
+        {% endif %}
+        {% if user_avgenergy == -1 %}
+            <p>Are you part of DecarboNet Energy Trial? Log in and visit your profile to learn more about your own
+                consumption.</p>
+        {% elif user_avgenergy == -2 %}
+            <p>We couldn't find any data.</p>
+        {% else %}
+            <p style="font-size: 1.5em">
+                <i class="fa fa-user"></i> {{ user_avgenergy }} kWh / day
+            </p>
+
+            <p class="text-faded">Your daily average consumption compared to the community.</p>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,15 @@
+Dear {{username}},
+
+The EnergyUse (https://energyuse.eu) community has been talking about halogen ovens (https://energyuse.eu/p/125/), meter readings (https://energyuse.eu/p/126/) and vaccum cleaners (https://energyuse.eu/p/123/).
+
+We have been hard at work improving EnergyUse by simplifying user navigation and discussion discovery:
+- Some topics and appliances descriptions are now generated automatically for providing more meaningful topic pages.
+- Relevant topics are added to existing discussions for improving discussion discovery.
+- Aggregated (i.e. annonymised) consumption data is now published on relevant pages and can be accessed as linked-data.
+
+We hope you will enjoy the new additions to EnergyUse and keep enriching the discussions!
+
+Please be in touch if you have any comment, problem, or suggestion!
+
+The EnergyUse team.
+contact@energyuse.eu

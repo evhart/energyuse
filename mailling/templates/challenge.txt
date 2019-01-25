@@ -1,0 +1,10 @@
+Dear {{username}},
+
+We invite you to participate in the "Climate Challenge", a new online competition that features climate-related quizzes including an energy task created for the EnergyUse (http://energyuse.eu) community. 
+
+Use your smart plug to measure how much energy it takes to prepare a cup of coffee or tea: http://www.ecoresearch.net/climate-challenge/energy
+
+We look forward to your feedback and hope that you will enjoy the game, which is hosted by the DecarboNet project (http://decarbonet.org) and organised in collaboration with climate.gov and the WWF Earth Hour (http://earthhour.org).
+
+The EnergyUse team wishes you a lovely weekend!
+contact@energyuse.eu

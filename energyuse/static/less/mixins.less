@@ -1,0 +1,74 @@
+// Mixins
+
+.transition-all() {
+    -webkit-transition: all 0.35s;
+    -moz-transition: all 0.35s;
+    transition: all 0.35s;
+}
+
+.background-cover() {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.button-variant(@color; @background; @border) {
+	color: @color;
+	background-color: @background;
+	border-color: @border;
+	.transition-all;
+
+	&:hover,
+	&:focus,
+	&.focus,
+	&:active,
+	&.active,
+	.open > .dropdown-toggle& {
+		color: @color;
+		background-color: darken(@background, 5%);
+	    border-color: darken(@border, 7%);
+	}
+	&:active,
+	&.active,
+	.open > .dropdown-toggle& {
+		background-image: none;
+	}
+	&.disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		&,
+		&:hover,
+		&:focus,
+		&.focus,
+		&:active,
+		&.active {
+			background-color: @background;
+			border-color: @border;
+		}
+	}
+
+	.badge {
+		color: @background;
+		background-color: @color;
+	}
+}
+
+.sans-serif-font() {
+	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.serif-font() {
+	font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.gradientAuto (@color: #000, @coef: 5%){
+    background: lighten(@color, @coef); /* Old browsers */
+    background: -moz-linear-gradient(top, lighten(@color, @coef) 0%, darken(@color, @coef) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,lighten(@color, @coef)), color-stop(100%,darken(@color, @coef))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, lighten(@color, @coef) 0%,darken(@color, @coef) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, lighten(@color, @coef) 0%,darken(@color, @coef) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, lighten(@color, @coef) 0%,darken(@color, @coef) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, lighten(@color, @coef) 0%,darken(@color, @coef) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='lighten(@color, @coef)', endColorstr='darken(@color, @coef)',GradientType=0 ); /* IE6-9 */
+}

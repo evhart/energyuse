@@ -1,0 +1,25 @@
+{% load humanize %}
+{% load server_tags %}
+{% load cache %}
+
+{% for post in featured_posts %}
+
+<div class="featured-post">
+    <div class="content">
+        <h4><i class="fa fa-star"></i> <a class="" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+        <blockquote class="peek">
+            <p>{{ post.peek|truncatechars:100 }}</p>
+            <div>
+                {% for tag in post.tag_set.all %}
+                    <a class="tag" href="/t/{{ tag.name }}/">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+            <footer style="clear: both; padding-top: 1em;">by <a href="{{ post.author.get_absolute_url }}">{% userlink post.author %}</a></footer>
+        </blockquote>
+
+
+
+</p>
+    </div>
+</div>
+{% endfor %}

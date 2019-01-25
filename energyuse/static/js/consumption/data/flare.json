@@ -1,0 +1,48 @@
+
+{
+ "product": "flare",
+ "children": [
+
+      {"product": "AgglomerativeCluster", "value": 3938, "diff": -1.2},
+      {"product": "CommunityStructure", "value": 3812, "diff": 1.2},
+      {"product": "HierarchicalCluster", "value": 6714, "diff": -1.2},
+      {"product": "MergeEdge", "value": 743, "diff": -1.2},
+      {"product": "BetweennessCentrality", "value": 3534, "diff": -1.2},
+      {"product": "LinkDistance", "value": 5731, "diff": 1.2},
+      {"product": "MaxFlowMinCut", "value": 7840, "diff": 0},
+      {"product": "ShortestPaths", "value": 5914, "diff": -1.2},
+      {"product": "SpanningTree", "value": 3416, "diff": 0},
+      {"product": "AspectRatioBanker", "value": 7074, "diff": -1.2},
+      {"product": "AgglomerativeCluster", "value": 3938, "diff": -1.2},
+      {"product": "CommunityStructure", "value": 3812, "diff": 1.2},
+      {"product": "HierarchicalCluster", "value": 6714, "diff": -1.2},
+      {"product": "MergeEdge", "value": 743, "diff": -1.2},
+      {"product": "BetweennessCentrality", "value": 3534, "diff": -1.2},
+      {"product": "LinkDistance", "value": 5731, "diff": 1.2},
+      {"product": "MaxFlowMinCut", "value": 7840, "diff": 0},
+      {"product": "ShortestPaths", "value": 5914, "diff": -1.2},
+      {"product": "SpanningTree", "value": 3416, "diff": 0},
+      {"product": "AspectRatioBanker", "value": 7074, "diff": -1.2},
+	  {"product": "AgglomerativeCluster", "value": 3938, "diff": -1.2},
+      {"product": "CommunityStructure", "value": 3812, "diff": 1.2},
+      {"product": "HierarchicalCluster", "value": 6714, "diff": -1.2},
+      {"product": "MergeEdge", "value": 743, "diff": -1.2},
+      {"product": "BetweennessCentrality", "value": 3534, "diff": -1.2},
+      {"product": "LinkDistance", "value": 5731, "diff": 1.2},
+      {"product": "MaxFlowMinCut", "value": 7840, "diff": 0},
+      {"product": "ShortestPaths", "value": 5914, "diff": -1.2},
+      {"product": "SpanningTree", "value": 3416, "diff": 0},
+      {"product": "AspectRatioBanker", "value": 7074, "diff": -1.2},
+      {"product": "AgglomerativeCluster", "value": 3938, "diff": -1.2},
+      {"product": "CommunityStructure", "value": 3812, "diff": 1.2},
+      {"product": "HierarchicalCluster", "value": 6714, "diff": -1.2},
+      {"product": "MergeEdge", "value": 743, "diff": -1.2},
+      {"product": "BetweennessCentrality", "value": 3534, "diff": -1.2},
+      {"product": "LinkDistance", "value": 5731, "diff": 1.2},
+      {"product": "MaxFlowMinCut", "value": 7840, "diff": 0},
+      {"product": "ShortestPaths", "value": 5914, "diff": -1.2},
+      {"product": "SpanningTree", "value": 3416, "diff": 0},
+      {"product": "AspectRatioBanker", "value": 7074, "diff": -1.2}
+ 
+ ]
+}

@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% load server_tags %}
+{% load humanize %}
+{% load eserver_tags %}
+
+{% block content %}
+
+    {#% search_bar %#}
+    {##}
+    {##}
+    {##}
+    {#    <div class="row">#}
+    {#        <div class="col-md-9">#}
+    {##}
+    {#            {% page_bar_sort_posts %}#}
+    {##}
+    {#            <div id="post-list">#}
+    {#                {% for post in posts %}#}
+    {#                    {% post_count_box post '' topic %}#}
+    {#                {% empty %}#}
+    {##}
+    {#                    <div class="alert alert-info">There are no results for this page.</div>#}
+    {##}
+    {#                {% endfor %}#}
+    {##}
+    {#            </div>#}
+    {##}
+    {#    {% page_bar_sort_posts %}#}
+    {##}
+    {#        </div>#}
+    {#        <div class="col-md-3 sidebar">#}
+    {##}
+    {#            {% include "banners/sidebar-postlist.html" %}#}
+    {##}
+    {#            {% sidebar_votes RECENT_VOTES %}#}
+    {##}
+    {#            {% sidebar_locations RECENT_USERS %}#}
+    {##}
+    {#            {% sidebar_awards RECENT_AWARDS %}#}
+    {##}
+    {#            {% sidebar_posts RECENT_REPLIES %}#}
+    {##}
+    {#        </div>#}
+    {#    </div>#}
+
+
+    {#    {% search_bar %}#}
+    <div class="row">
+
+
+        {# Questions #}
+        <div class="col-lg-6">
+            <div>
+                <div class="navbar-header" style="padding-top: 1em">
+                    Top Discussions
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sort by: {{ sort }}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="?sort=update&amp;limit=all time&amp;q=">update</a></li>
+
+                            <li><a href="?sort=views&amp;limit=all time&amp;q=">views</a></li>
+
+                            <li><a href="?sort=followers&amp;limit=all time&amp;q=">followers</a></li>
+
+                            <li><a href="?sort=answers&amp;limit=all time&amp;q=">replies</a></li>
+
+                            <li><a href="?sort=bookmarks&amp;limit=all time&amp;q=">bookmarks</a></li>
+
+                            <li><a href="?sort=votes&amp;limit=all time&amp;q=">votes</a></li>
+
+                            <li><a href="?sort=rank&amp;limit=all time&amp;q=">rank</a></li>
+
+                            <li><a href="?sort=creation&amp;limit=all time&amp;q=">creation</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Limit to: {{ limit }}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="?sort=update&amp;limit=all time&amp;q=">all time</a></li>
+
+                            <li><a href="?sort=update&amp;limit=today&amp;q=">today</a></li>
+
+                            <li><a href="?sort=update&amp;limit=this week&amp;q=">this week</a></li>
+
+                            <li><a href="?sort=update&amp;limit=this month&amp;q=">this month</a></li>
+
+                            <li><a href="?sort=update&amp;limit=this year&amp;q=">this year</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="padding-top: 1em">
+                <div id="post-list">
+                    {% for post in posts %}
+                        {% post_count_box post '' topic %}
+                        {% empty %}
+                        <div class="alert alert-info">There are no results for this page.</div>
+                    {% endfor %}
+                    {% page_bar_sort_posts %}
+                </div>
+            </div>
+
+        </div>
+
+        {# News #}
+        <div class="col-lg-3">
+
+             <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                Top Contributors
+            </div>
+            <ul class="nav nav-tabs nav-tabs-right">
+
+                {#                <li class="dropdown">#}
+                {#                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Limit to: all time#}
+                {#                        <span class="caret"></span></a>#}
+                {#                    <ul class="dropdown-menu">#}
+                {#                        <li><a href="#">Submenu 1-1</a></li>#}
+                {#                        <li><a href="#">Submenu 1-2</a></li>#}
+                {#                        <li><a href="#">Submenu 1-3</a></li>#}
+                {#                    </ul>#}
+                {#                </li>#}
+            </ul>
+            {% top_contributors %}
+
+
+            <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                Top Contributions
+            </div>
+            <ul class="nav nav-tabs nav-tabs-right">
+
+                {#                <li class="dropdown">#}
+                {#                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Limit to: all time#}
+                {#                        <span class="caret"></span></a>#}
+                {#                    <ul class="dropdown-menu">#}
+                {#                        <li><a href="#">Submenu 1-1</a></li>#}
+                {#                        <li><a href="#">Submenu 1-2</a></li>#}
+                {#                        <li><a href="#">Submenu 1-3</a></li>#}
+                {#                    </ul>#}
+                {#                </li>#}
+            </ul>
+            {% featured %}
+
+        </div>
+
+        {# Sidebar #}
+        <div class="col-lg-3">
+            <div>
+                <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                    Discussed Topics
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+                </ul>
+            </div>
+            {% featured_tags %}
+
+
+            <div>
+                <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                    Activity
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+                </ul>
+            </div>
+
+            <div style="padding-top: 1em">
+                {% sidebar_votes RECENT_VOTES %}
+
+                {% sidebar_locations RECENT_USERS %}
+
+                {% sidebar_awards RECENT_AWARDS %}
+
+                {% sidebar_posts RECENT_REPLIES %}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

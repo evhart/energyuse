@@ -1,0 +1,79 @@
+
+      <!--   <div class="container"> -->
+       		<!-- Top Navigation -->
+		 {% if user.is_authenticated %}
+		<div class="row">
+        		<div class="col-md-12 headerC">
+   			<a class="btn btn-primary" href="{% url "account_logout" %}">Logout</a>
+		 </div>
+		 </div>
+		 {% else %}
+		 
+		 <div class="md-modal md-effect-1" id="modal-1">
+			<div class="md-content">
+				<h3>LOGIN</h3>
+				<div class="md-form">
+				    Sign in with {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+				  <div class="login-or">{#% trans 'or' %#}</div>
+					<form method="POST" action="{% url 'account_login' %}">
+						{% csrf_token %}
+  						<input type="text" placeholder="E-mail" name="login"><br>
+    			    	<input type="password" placeholder="Password" name="password"><br>
+        				<label for="id_remember_menu" class="text-primary">Remember Me:</label>
+        				<input id="id_remember_menu" name="remember" type="checkbox"><br>
+	                    {% if redirect_field_value %}
+ 					 		<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  						{% endif %}
+                   
+						<p class="text-warning">
+					 		<a href="{% url 'account_reset_password' %}">{#% trans "Forgot Password?" %#}</a>
+					 		<br/>
+					 		<a href="{% url 'account_signup' %}">Sign up</a>
+					 	</p>
+						<button type="submit">{#% trans "LOGIN" %#}</button>
+					 </form>
+					 
+
+				</div>
+			</div>
+		</div>
+		 
+			<section>
+       <div class="row">
+        		<div class="col-md-12 headerC">
+			<div class="main clearfix">
+				<div class="column">
+					<button class="md-trigger" data-modal="modal-1">LOGIN</button>
+				</div>
+			</div>
+			</div>
+			</div>
+			</section>
+
+		<div class="md-overlay"></div><!-- the overlay element -->
+		 
+		 {% endif %}
+	<section>
+       <div class="row">
+       		<div class="col-md-12 headerC">
+        	<div class="brandBox">
+            	<h1>DecarboNet</h1>
+                <h3>Raising Collective Awareness</h3>
+            </div>
+            <div class="Navbox">
+            	 <button id="trigger-overlay" type="button"><img src="{{ STATIC_URL }}img/icon-menu-b.png" width="32" height="32" alt=""/></button>
+            </div>
+            <div class="clearfix"></div>
+        	</div>
+        </div>
+         {% if user.is_authenticated %}
+        <div class="row">
+        	<div class="col-md-12 headerC">
+       
+    			<h3>Welcome, {{ user.get_username }}. Thanks for logging in. Your current score is {{request.user_score}}.</h3>
+
+	
+        	</div>	
+        </div>
+        {% endif %}
+      </section>

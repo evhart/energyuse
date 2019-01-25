@@ -1,0 +1,29 @@
+Dear {{username}},
+
+Zombies can make up as much as 50% of your bill. Do you know if you have many of them in your house?
+
+Did you know that they are devices that are usually on even when you go to bed, including those in standby mode.
+
+If 1 Watt of electricity 24hrs/day costs about £1.20 a year, a 40W load could be costing you up to £50 a year.
+
+How to find the zombies:
+1) Switch off any appliances as you would if you were going to bed - also turn off your fridge/freezer.
+2) Record the load (W/kW) shown on your electricity display – in a typical home we’d expect the remaining load to be in the range of 150W-250W.
+3) Now, go round your home and switch off everything else – gaming consoles, phone chargers, clock radios, and other devices left in standby mode. How low can you go on your electricity display? You should be able to get close to zero.
+4) Then switch only the things you really need back on (but not your fridge/freezer yet!) and record the load on the electricity display.
+5) Look at the difference between the two readings. Every 1W you have reduced = more than £1 a year saved.
+6) Now remember to switch your fridge/freezer back on!
+ 
+
+To win an Amazon voucher, you have until the 7th of November to create a post on energyuse about the zombies you found.
+Please add your contributions to https://energyuse.eu/p/153/.
+
+The author of the most up-voted post will receive a £25 Amazon voucher; and another £25 voucher will go for the most interesting contribution (as picked by the DecarboNet project)!
+
+Some more information about "background load" can be found at http://www.geotogether.com/2015/10/30/how-hares-tortoises-and-chameleons-can-help-you-save-money-on-your-electricity-bill/.
+
+
+Happy Halloween !
+
+The EnergyUse team.
+contact@energyuse.eu

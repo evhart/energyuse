@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load humanize %}
+
+<div id="CookielawBanner" style="position: fixed; bottom: 0; color: white; background: #777777; margin: 0; left: 0; width: 100%; padding: 20px">
+    <div class="container bg-dark">
+        <p>
+            <a class="btn btn-success pull-right" style="margin-left: 2em" href="javascript:Cookielaw.createCookielawCookie();">{% trans "COOKIE_INFO_OK" %}</a>
+            {% trans "COOKIE_INFO_PARA" %}
+        </p>
+    </div>
+</div>

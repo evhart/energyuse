@@ -1,0 +1,36 @@
+{% extends "starbase.html" %}
+{% load server_tags %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    Submit Energy Consumption Reading
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h2>Submit Energy Consumption Information for an Appliance</h2>
+
+            <p>
+                If you can measure the energy consumption of an appliance but do not have an EnergyNote account, you can submit a reading manually for a given appliance.
+            </p>
+
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <br>
+            <form action="." method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Submit Consumption" class="btn btn-success">
+            </form>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

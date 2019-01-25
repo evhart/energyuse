@@ -1,0 +1,33 @@
+{% extends "starbase.html" %}
+{% load server_tags %}
+{% load humanize %}
+
+{% block content %}
+
+{#    {% search_bar %}#}
+
+{#    {% page_bar %}#}
+
+    <div class="row"  style="padding-bottom: 2em;">
+        <div class="col-md-10 col-lg-offset-2">
+
+
+            <div id="tag-list">
+                {% for tag in tags %}
+
+                    <div class="col-xs-3 col-md-3 text-center">
+                        <a class="tag" href="/t/{{ tag.name }}">{{ tag.name }} &times; {{ tag.count }}
+                        </a>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% page_bar %}
+    </div>
+
+
+{% endblock %}

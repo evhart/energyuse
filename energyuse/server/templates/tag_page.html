@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% load server_tags %}
+{% load humanize %}
+{% load inplace_edit %}
+
+{% block extras %}
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.1.0/jssocials.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.1.0/jssocials.css" />
+
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.1.0/jssocials-theme-flat.css" />
+
+{% inplace_static %}
+{% endblock %}
+
+{% block content %}
+
+    {#% search_bar %#}
+    {##}
+    {##}
+    {##}
+    {#    <div class="row">#}
+    {#        <div class="col-md-9">#}
+    {##}
+    {#            {% page_bar_sort_posts %}#}
+    {##}
+    {#            <div id="post-list">#}
+    {#                {% for post in posts %}#}
+    {#                    {% post_count_box post '' topic %}#}
+    {#                {% empty %}#}
+    {##}
+    {#                    <div class="alert alert-info">There are no results for this page.</div>#}
+    {##}
+    {#                {% endfor %}#}
+    {##}
+    {#            </div>#}
+    {##}
+    {#    {% page_bar_sort_posts %}#}
+    {##}
+    {#        </div>#}
+    {#        <div class="col-md-3 sidebar">#}
+    {##}
+    {#            {% include "banners/sidebar-postlist.html" %}#}
+    {##}
+    {#            {% sidebar_votes RECENT_VOTES %}#}
+    {##}
+    {#            {% sidebar_locations RECENT_USERS %}#}
+    {##}
+    {#            {% sidebar_awards RECENT_AWARDS %}#}
+    {##}
+    {#            {% sidebar_posts RECENT_REPLIES %}#}
+    {##}
+    {#        </div>#}
+    {#    </div>#}
+
+
+    {#    {% search_bar %}#}
+    <div class="row">
+
+
+        {# Questions #}
+        <div class="col-lg-9">
+            <div>
+                <div class="navbar-header" style="padding-top: 1em">
+                    Top Discussions
+                </div>
+
+                <ul class="nav nav-tabs nav-tabs-right">
+
+{#                    <li>#}
+{#                        <a href="#" type="button">Info + Analytics </a>#}
+{#                    </li>#}
+                    <li>
+                        <a href="#" type="button" class="active">Discussions</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Limit to: {{ limit }}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="?sort=update&amp;limit=all time&amp;q=">all time</a></li>
+
+                            <li><a href="?sort=update&amp;limit=today&amp;q=">today</a></li>
+
+                            <li><a href="?sort=update&amp;limit=this week&amp;q=">this week</a></li>
+
+                            <li><a href="?sort=update&amp;limit=this month&amp;q=">this month</a></li>
+
+                            <li><a href="?sort=update&amp;limit=this year&amp;q=">this year</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sort by: {{ sort }}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="?sort=update&amp;limit=all time&amp;q=">update</a></li>
+
+                            <li><a href="?sort=views&amp;limit=all time&amp;q=">views</a></li>
+
+                            <li><a href="?sort=followers&amp;limit=all time&amp;q=">followers</a></li>
+
+                            <li><a href="?sort=answers&amp;limit=all time&amp;q=">replies</a></li>
+
+                            <li><a href="?sort=bookmarks&amp;limit=all time&amp;q=">bookmarks</a></li>
+
+                            <li><a href="?sort=votes&amp;limit=all time&amp;q=">votes</a></li>
+
+                            <li><a href="?sort=rank&amp;limit=all time&amp;q=">rank</a></li>
+
+                            <li><a href="?sort=creation&amp;limit=all time&amp;q=">creation</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="tag-header" class="row"
+                 {% if tag.image %}style="background-image: url('{{ tag.image.url }}');"{% endif %}>
+
+                <div id="tag-info">
+                    <div id="tag-icon" class="col-lg-2">
+                        <div class="text-center">
+{#                             {% inplace_edit "tag.icon" adaptor="image_thumb" class_inplace="inplace"%}#}
+                            {% if tag.icon %}{
+                            <img src="{{ tag.icon.url }}">
+                            {% else %}
+                               <i class="fa fa-4x fa-plug text-dark" style="font-size:80px;"></i>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <div class="col-lg-8">
+                        <h1>{% if tag.fullname %}{{ tag.fullname }}{% endif %} <span class="tag" style="float: none">{{ topic }}</span></h1>
+{#                         {% inplace_edit "tag.description|safe" adaptor="tiny" %}#}
+                           {% if tag.description %}{{ tag.description|safe }}{% endif %}
+                        <p>
+                                                        <span id="share" class="jssocials"></span>
+                        </p>
+                    </div>
+                    <div class="col-lg-2">
+                    </div>
+
+
+                </div>
+            </div>
+            <div id="post-list">
+                {% for post in posts %}
+                    {% post_count_box post '' topic %}
+                    {% empty %}
+                    <div class="alert alert-info">There are no results for this page.</div>
+                {% endfor %}
+                {% page_bar_sort_posts %}
+            </div>
+
+
+        </div>
+        {# Sidebar #}
+        <div class="col-lg-3">
+
+            <div>
+                <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                    Statistics
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+                </ul>
+            </div>
+            <div class="tag-stats text-center">
+                <p>{{ page_obj.paginator.count|intcomma }} Discussion{% if page_obj.paginator.count  > 1%}s{% endif %}</p>
+{#                <p>1800 Mesurements</p>#}
+                <p>{{ nb_sub }} Follower{% if nb_sub > 1%}s{% endif %}</p>
+                <p>
+                {% if request.user.is_authenticated %}
+                   {% if is_subscribed %}
+                    <a href="{% url 'topic-subscribe' topic %}"><button class="btn btn-success">Unfollow #{{ topic }}</button></a>
+                    {% else %}
+                       <a href="{% url 'topic-subscribe' topic %}"><button class="btn btn-success">Follow #{{ topic }}</button></a>
+                    {% endif %}
+                {% endif %}
+                </p>
+            </div>
+
+
+            <div>
+                <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                    Featured Topics
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+                </ul>
+            </div>
+            <div class="featured service-box">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 text-center">
+                                        <a href="/topics/coffee/" class="unlink">
+                                        <div class="service-box">
+                                            <i class="fa fa-4x fa-coffee wow bounceIn text-primary" style="visibility: visible; animation-name: bounceIn;"></i>
+
+                                            <h3>Coffee</h3>
+
+                                            <p class="text-faded">How much does it costs to make a cup of coffee?</p>
+                                        </div>
+                                            </a>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 text-center">
+                                        <a href="/topics/lighting/" class="unlink">
+                                            <div class="service-box">
+                                            <i class="fa fa-4x fa-lightbulb-o  wow bounceIn text-primary" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceIn;"></i>
+
+                                            <h3>Lighting</h3>
+
+                                            <p class="text-faded">Led lighing or light bulbs ?</p>
+                                        </div>
+                                            </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 text-center">
+                                        <a href="/topics/charging/" class="unlink">
+                                        <div class="service-box">
+                                            <i class="fa fa-4x fa-mobile wow bounceIn text-primary" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceIn;"></i>
+
+                                            <h3>Charging Devices</h3>
+
+                                            <p class="text-faded">How much does it costs to charge your phone or
+                                                tablet?</p>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 text-center">
+                                        <a href="/topics/cooking/" class="unlink">
+                                        <div class="service-box">
+                                            <i class="fa fa-4x fa-cutlery  wow bounceIn text-primary" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceIn;"></i>
+
+                                            <h3>Eating</h3>
+
+                                            <p class="text-faded">What is the cost of cooking?</p>
+                                        </div>
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+            <div>
+
+            </div>
+
+            <div>
+                <div class="navbar-header" style="padding-top: 1em; padding-bottom: 0.5em">
+                    Activity
+                </div>
+                <ul class="nav nav-tabs nav-tabs-right">
+                </ul>
+            </div>
+
+            <div style="padding-top: 1em">
+                {% sidebar_votes RECENT_VOTES %}
+
+                {% sidebar_locations RECENT_USERS %}
+
+                {% sidebar_awards RECENT_AWARDS %}
+
+                {% sidebar_posts RECENT_REPLIES %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#share").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["twitter", "facebook", "googleplus", "linkedin"],
+            text: "#energyuse #decarbonet: Come see what the crowd is saying about #{{ topic }}:"
+        });
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% load humanize %}
+{% load server_tags %}
+{% load cache %}
+
+{#{% for user in top_users %}#}
+
+<div class="top-users">
+    <div class="content row">
+                {% for user in top_users %}
+                    <div class="col-xs-4 col-md-4 box text-center">
+                     <div>
+                        <a href="{{ user.get_absolute_url }}"><div class="circle-image" style="background-image: url('{% gravatar_img user 82 %}')"></div></a>
+                    </div>
+                    <div class="uname">{% userlink user %}</div>
+                    </div>
+                {% endfor %}
+    </div>
+</div>
+{#{% endfor %}#}
+
+
+{##}
+{#<div class="col-xs-3 col-md-2 box text-center visible-lg visible-md">#}
+{#    <div>#}
+{#        <a href="{{ user.get_absolute_url }}">{% gravatar user 82 %}</a>#}
+{#    </div>#}
+{#    <div class="uname">{% userlink user %}</div>#}
+{#    {% if lastlogin %}#}
+{#        <div class="ago">visited {{ user.profile.last_login|time_ago }}</div>#}
+{#    {% else %}#}
+{#        <div class="ago">joined {{ user.profile.date_joined|time_ago }}</div>#}
+{#    {% endif %}#}
+{##}
+{#    <div class="loc">{{ user.profile.location }}</div>#}
+{#</div>#}
+{##}
+{#<div class="col-xs-3 col-md-2 box text-center visible-sm visible-xs">#}
+{##}
+{#    <div class="uname">{% userlink user %}</div>#}
+{#    <div class="loc">{{ user.profile.location }}</div>#}
+{#</div>#}

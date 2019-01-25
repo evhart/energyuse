@@ -1,0 +1,43 @@
+{% extends "starbase.html" %}
+{% load server_tags %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    EnergyNote Edit
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h2>Connect your EnergyNote Account</h2>
+
+            <p>
+                Are you part of DecarboNet Energy Trial? If yes, please add your Energynote account! (EnergyNote ?! see
+                FAQ).
+                You will be able to compare your consumption with the DecarboNet Community average.
+            </p>
+
+            <p>
+                You can change your mind later and ask us to disconnect your Energynote (See FAQ).
+
+                Your EnergyNote password is only used once and is not stored.
+            </p>
+        </div>
+
+        {% if user.is_energynote_verified %}
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-info" role="alert">You have already linked an EnergyNote account.</div>
+            </div>
+        {% endif %}
+
+        <div class="col-md-8 col-md-offset-2">
+            <br>
+            {% crispy form %}
+        </div>
+    </div>
+
+
+{% endblock %}

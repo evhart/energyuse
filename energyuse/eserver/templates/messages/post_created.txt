@@ -1,0 +1,6 @@
+{{user.name}} posted the {{post.get_type_display}}: "{{ post.root.get_title|safe }}":
+
+{{post.as_text|safe|truncatewords:150}}
+
+---
+See the full post at: http://energyuse.eu{{ post.get_absolute_url }}
