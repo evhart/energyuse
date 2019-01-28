@@ -239,7 +239,7 @@ MIDDLEWARE_CLASSES = (
 
 DEFAULT_MESSAGE_PREF = "email"
 
-MEDIA_ROOT=os.path.join(BASE_DIR, 'live', 'export', 'media') #'live/export/media'
+MEDIA_ROOT=os.path.join(BASE_DIR, 'live', 'export', 'media').replace('\\', '/') #'live/export/media'
 MEDIA_URL='/media/'
 
 
@@ -290,3 +290,6 @@ DEBUG = False
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
+
+
+SERVE_MEDIA=True

@@ -9,6 +9,8 @@ ENV NB_USER energyuse
 ENV NB_UID 1000
 ENV HOME /home/${NB_USER}
 
+
+
 # Add user:
 RUN adduser -D \
     -g "Default user" \
@@ -17,8 +19,7 @@ RUN adduser -D \
 
 WORKDIR /home/energyuse
 
-RUN apk add --no-cache bash build-base mariadb mariadb-client mariadb-dev zlib zlib-dev jpeg jpeg-dev nodejs nodejs-npm && ln -s /lib/libz.so /usr/lib/
-# RUN apk add --no-cache bash build-base postgresql postgresql-client postgresql-dev zlib zlib-dev jpeg jpeg-dev nodejs nodejs-npm && ln -s /lib/libz.so /usr/lib/
+RUN apk add --no-cache bash pv build-base mariadb mariadb-client mariadb-dev zlib zlib-dev jpeg jpeg-dev nodejs nodejs-npm && ln -s /lib/libz.so /usr/lib/
 
 # Configure DB
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql \
@@ -28,7 +29,7 @@ RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql \
 
 RUN /usr/bin/mysqld_safe --syslog --nowatch && sleep 5 \
     && echo "CREATE USER 'energyuse'@'localhost' IDENTIFIED BY 'wG4bbnKSV7Y4ue9d';" > /tmp/sql \
-    && echo "CREATE DATABASE energyuse;" >> /tmp/sql \
+    && echo "CREATE DATABASE energyuse DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" >> /tmp/sql \
     && echo "GRANT ALL ON *.* TO 'energyuse'@'0.0.0.0' IDENTIFIED BY 'wG4bbnKSV7Y4ue9d' WITH GRANT OPTION;" >> /tmp/sql \
     && echo "GRANT ALL ON *.* TO 'energyuse'@'127.0.0.1' IDENTIFIED BY 'wG4bbnKSV7Y4ue9d' WITH GRANT OPTION;" >> /tmp/sql \
     && echo "GRANT ALL ON *.* TO 'energyuse'@'localhost' IDENTIFIED BY 'wG4bbnKSV7Y4ue9d' WITH GRANT OPTION;" >> /tmp/sql \
@@ -58,7 +59,21 @@ RUN /usr/bin/mysqld_safe --syslog --nowatch && sleep 5 \
     && python manage.py compress 
 
 
-EXPOSE 8000
+# Load backup if a backup directory is specified (a context directory with media backup and sql.gz file):
+#  docker build -t evhart/energyuse:latest --build-arg BACKUP=./backup . (the directory needs to be in the context)
+ARG BACKUP=""
+RUN if [ "$BACKUP" = "" ] ; then  \
+            /bin/echo -e "\033[1;31mNo backup provided.\033[0m" ; \
+        else \
+            /bin/echo -e "\033[1;32mBackup directory provided: ${BACKUP}.\033[0m" ; \
+            source energyuse/settings.env ; \
+            /usr/bin/mysqld_safe --syslog --nowatch && sleep 5 ; \
+            mysql -u 'root' --password="XXpABFgap2yZWKtm" -e "DROP DATABASE energyuse; CREATE DATABASE energyuse DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" ; \
+            pv ${BACKUP}/backup.sql.gz | zcat | mysql -u 'root' --password="XXpABFgap2yZWKtm" -D energyuse ; \
+            mkdir -p ./live/export/media && cp -r ${BACKUP}/media/* ./live/export/media ; \
+            rm -R $BACKUP ; \  
+    fi
 
-# RUN gunicorn -b 0.0.0.0:8000 energyuse.wsgi
+
+EXPOSE 8000
 CMD ["sh","-c","/usr/bin/mysqld_safe --syslog --nowatch && source energyuse/settings.env && gunicorn energyuse.wsgi -b 0.0.0.0:8000"]

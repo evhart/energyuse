@@ -1,5 +1,6 @@
 # ![EnergyUse Q/A platform (Unmaintained)](docs/title.png "EnergyUse Q/A platform (Unmaintained)")
-Website: https://energyuse.eu
+
+> :warning: The EnergyUse platform code is unmaintened and will not be updated.
 
 EnergyUse was [DecarboNet](https://www.decarbonet.eu) online community for sharing real-life experiences on the energy consumption of typical appliances. The platform is based on the [Biostar Q&A platform](https://github.com/ialbert/biostar-central).
 
@@ -13,9 +14,6 @@ The platform collects data from smart plugs, and exports appliance consumption i
 If you use this code, please cite the following publication:
 - Burel, G., Piccolo, L. and Alani, H (2016). *[EnergyUse – A Collective Semantic Platform for Monitoring and Discussing Energy Consumption](http://www-kasm.nii.ac.jp/iswc2016/papers/paper_A47_.pdf)*. In Proceedings of the 15th International Semantic Web Conference.
 
-<Warning>
-:warning: The EnergyUse platform is unmaintened and will not be updated.
-</Warning>
 
 ## Features
 - A question Answering platform based on the [Biostar Q&A platform](https://github.com/ialbert/biostar-central).
@@ -32,6 +30,11 @@ If you use this code, please cite the following publication:
 You can run a barebone version of EnergyUse using [docker](https://docker.com/). The container does not automatically update tags and index the content (see the different commands using manage.py and the [Biostar README.md](README_BIOSTAR.md) file for more information). First, you need to build the docker image.
 ```sh
 docker build -t evhart/energyuse:latest .
+```
+
+If you want to load an existing database dump as well as user uploaded files such as images, you need to set the environment variable '*BACKUP*' with *--build-arg*  when creating the image. The varibale needs to point to a directory that has a '*backup.sql.gz*' file and a '*media*' subdirectory that contains user uploaded media.  
+```sh
+docker build -t evhart/energyuse:latest --build-arg BACKUP=./backup .
 ```
 
 The Energyuse will be automatically started when you start a CREES container (you can modify the [settings.env](energyuse/settings.env) and  [settings.py](energyuse/settings.py) files for customising the server configuration). By default, the container uses a default password and run using [gunicorn](https://gunicorn.org/) on port 8000 with an internal [MariaDB](https://mariadb.org/) database:

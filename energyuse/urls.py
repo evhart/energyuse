@@ -153,7 +153,9 @@ urlpatterns = patterns('',
      # Local robots.txt.
     url(r'^robots\.txt$', TemplateView.as_view(template_name="robots.txt", content_type='text/plain'), name='robots'),
 
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Adding the sitemap.
 urlpatterns += patterns('',
@@ -191,3 +193,9 @@ if settings.DEBUG:
         url(r'^__debug__/', include(debug_toolbar.urls)),
         url(r'^test/login/', test_login),
     )
+
+if settings.SERVE_MEDIA:
+    urlpatterns += patterns('',
+        url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'),
+            'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT}),)
