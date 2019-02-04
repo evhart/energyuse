@@ -69,7 +69,7 @@ RUN if [ "$BACKUP" = "" ] ; then  \
             source energyuse/settings.env ; \
             /usr/bin/mysqld_safe --syslog --nowatch && sleep 5 ; \
             mysql -u 'root' --password="XXpABFgap2yZWKtm" -e "DROP DATABASE energyuse; CREATE DATABASE energyuse DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" ; \
-            pv ${BACKUP}/backup.sql.gz | zcat | mysql -u 'root' --password="XXpABFgap2yZWKtm" -D energyuse ; \
+            pv ${BACKUP}/backup.sql.gz | gunzip | mysql -u 'root' --password="XXpABFgap2yZWKtm" -D energyuse ; \
             mkdir -p ./live/export/media && cp -r ${BACKUP}/media/* ./live/export/media ; \
             rm -R $BACKUP ; \  
     fi
