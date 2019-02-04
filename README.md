@@ -32,7 +32,7 @@ You can run a barebone version of EnergyUse using [docker](https://docker.com/).
 docker build -t evhart/energyuse:latest .
 ```
 
-If you want to load an existing database dump as well as user uploaded files such as images, you need to set the environment variable '*BACKUP*' with *--build-arg*  when creating the image. The varibale needs to point to a directory that has a '*backup.sql.gz*' file and a '*media*' subdirectory that contains user uploaded media.  
+If you want to load an existing database dump as well as user uploaded files such as images, you need to set the environment variable '*BACKUP*' with *--build-arg*  when creating the image. The varibale needs to point to a directory that contains '*.sql.gz*' table backup files and a '*media*' subdirectory that contains user uploaded media.  
 ```sh
 docker build -t evhart/energyuse:latest --build-arg BACKUP=./backup .
 ```

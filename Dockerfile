@@ -69,11 +69,19 @@ RUN if [ "$BACKUP" = "" ] ; then  \
             source energyuse/settings.env ; \
             /usr/bin/mysqld_safe --syslog --nowatch && sleep 5 ; \
             mysql -u 'root' --password="XXpABFgap2yZWKtm" -e "DROP DATABASE energyuse; CREATE DATABASE energyuse DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" ; \
-            pv ${BACKUP}/backup.sql.gz | gunzip | mysql -u 'root' --password="XXpABFgap2yZWKtm" -D energyuse ; \
+            mysql -u 'root' --password="XXpABFgap2yZWKtm" -e "SET global net_buffer_length=1048576; SET global max_allowed_packet=1073741824; SET foreign_key_checks = 0" ; \ 
+            count=`ls -l ${BACKUP}/*.sql.gz | grep -v ^l | wc -l` ; \
+            c_count=0 ; \
+            for filename in ${BACKUP}/*.sql.gz; do \
+                [ -e "${filename#/}" ] || continue ; \
+                c_count=$((c_count+1)) ; \
+                /bin/echo -e "\033[1;32m (${c_count}/${count}) Processing: ${filename#/}.\033[0m" ; \
+                /usr/bin/pv -f ${filename#/} | gunzip | mysql -u 'root' --password="XXpABFgap2yZWKtm" -D energyuse ; \
+            done ; \
             mkdir -p ./live/export/media && cp -r ${BACKUP}/media/* ./live/export/media ; \
             rm -R $BACKUP ; \  
+            mysql -u 'root' --password="XXpABFgap2yZWKtm" -e "SET foreign_key_checks = 1" ; \           
     fi
 
-
 EXPOSE 8000
-CMD ["sh","-c","/usr/bin/mysqld_safe --syslog --nowatch && source energyuse/settings.env && gunicorn energyuse.wsgi -b 0.0.0.0:8000"]
+CMD ["sh","-c","/usr/bin/mysqld_safe --syslog --nowatch && sleep 5 && source energyuse/settings.env && gunicorn energyuse.wsgi -b 0.0.0.0:8000"]
