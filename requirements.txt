@@ -46,7 +46,7 @@ oauthlib==1.0.3
 ordereddict==1.1
 Pillow==3.1.1
 pyelasticsearch==1.4
-Pygments==1.6
+Pygments==2.7.4
 pyparsing==2.0.2
 python-openid==2.2.5
 pytz==2015.7
