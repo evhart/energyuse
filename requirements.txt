@@ -19,7 +19,7 @@ django-classy-tags==0.7.1
 django-compressor==2.2
 django-cookie-law==1.0.6
 django-crispy-forms==1.4.0
-django-debug-toolbar==1.4
+django-debug-toolbar==1.11.1
 django-filer==1.1.1
 django-front==0.5.1
 django-grappelli==2.7.3
