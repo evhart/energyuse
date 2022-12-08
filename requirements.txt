@@ -7,7 +7,7 @@ billiard==3.3.0.22
 bleach==1.4
 celery==3.1.20
 celerymon==1.0.3
-certifi==2017.4.17
+certifi==2022.12.7
 chardet==3.0.2
 Django==1.8.19
 django-allauth==0.19.1
